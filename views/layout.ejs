@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> -->
+    <!-- <link rel="Shortcut Icon" href="/favicon.ico" /> -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link href="/styles/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <style>
+    body {
+        padding-top: 20px;
+    }
+    </style>
+    <title>myQuiz</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Nav Static navbar-->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--
+                    <div class="navbar-text navbar-left">
+                        myQuiz
+                        <a class="navbar-link" href="https://github.com/nicolasml/myQuiz">Follow us at Github!</a>
+                    </div>
+                    -->
+                    <a class="navbar-brand" href="/">Quiz</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav" role="menu">
+                        <li><a href="/">Inicio</a></li>
+                        <!-- <li class="active" -->
+                        <li><a href="/quizes/question">Preguntas</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container-fluid -->
+        </nav>
+
+        <!-- site body -->
+        <section>
+            <%- body %>
+        </section>
+
+        <!-- site footer -->
+        <footer class="footer">
+            <hr/>
+            <p><a href="https://github.com/nicolasml/myQuiz">Proyecto en Github</a></p>
+        </footer>
+
+    </div><!-- container -->
+    
+    <!-- script plugins -->
+    <script src="/scripts/jquery-2.1.4.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+
+</body>
+
+</html>
