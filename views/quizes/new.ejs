@@ -1,0 +1,27 @@
+        <!-- Jumbotron -->
+        <div class="jumbotron text-center">
+            <h1>Añadir pregunta</h1>
+        </div>
+        <!-- __form.ejs  -->
+        <form class="form-horizontal" action="/quizes/create" method="POST">
+            <!-- form content here -->
+            <div class="form-group">
+                <!-- label and control -->
+                <label for="pregunta" class="control-label col-sm-3">Pregunta:</label>
+                <div class="col-sm-5">
+                    <input type="text" name="pregunta" id="pregunta" class="form-control" placeholder="<%= quiz.pregunta %>"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <!-- label and control -->
+                <label for="respuesta" class="control-label col-sm-3">Respuesta:</label>
+                <div class="col-sm-5">
+                    <input type="text" name="respuesta" id="respuesta" class="form-control" placeholder="<%= quiz.respuesta %>"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-5 col-sm-offset-3">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>

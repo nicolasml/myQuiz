@@ -36,6 +36,21 @@ var models = require('../models/models.js');
         	var resultado = 'Incorrecto :-(';
         	if ( req.query.respuesta === req.quiz.respuesta ) resultado = 'Correcto :-)';
             res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado});
+        },
+        new: function(req, res) {  // GET /quizes/new
+            //var quiz = models.Quiz.build({pregunta: "Pregunta", respuesta: "Respuesta"});
+            var quiz = {pregunta: "Pregunta", respuesta: "Respuesta"};
+            res.render('quizes/new', {quiz: quiz});
+        },
+        create: function(req, res) {  // POST /quizes/create
+            // nuevo objeto no persistente asociado a la tabla Quiz
+            var qz = {pregunta: req.body.pregunta, respuesta: req.body.respuesta};
+            var quiz = models.Quiz.build(qz); 
+
+            // inserta el objeto quiz, guarda en BBDD los campos pregunta y respuesta
+            quiz.save({ fields: ["pregunta","respuesta"]}).then( function(){
+                res.redirect('/quizes');
+            });
         }
     }
 };
