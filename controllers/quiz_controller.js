@@ -5,9 +5,19 @@ var models = require('../models/models.js');
 
     return {
     	index: function(req, res) {	// GET /quizes
-        	models.Quiz.findAll().then(function (quizes){
-        		res.render('quizes/index.ejs', {quizes: quizes});
-        	}).catch( function(error){ next(error); });
+    		if (!req.query.search) {
+        		models.Quiz.findAll().then(function (quizes){
+        			res.render('quizes/index.ejs', {quizes: quizes});
+        		}).catch( function(error){ next(error); });
+        	}
+        	else {
+        		var search = "%" + req.query.search.replace(/\s/g, "%") + "%";
+        		models.Quiz.findAll({where: ["pregunta like ?", search]})
+        		.then(function (quizes){
+        			res.render('quizes/index.ejs', {quizes: quizes});
+        		}).catch( function(error){ next(error); });
+        		console.log("search: " + search);
+        	}
         },
         load: function(req, res, next, quizId) {	// Autoload - factoriza el código si incluye ruta :quizId
         	models.Quiz.find(req.params.quizId).then( function(quiz) {
