@@ -93,6 +93,16 @@ var models = require('../models/models.js');
                     res.render('quizes/edit', {quiz: req.quiz, errors: errors});
                 }
             );
+        },
+        destroy: function(req, res) {   // DELETE /quizes/:id
+            req.quiz.destroy().then( 
+                function() {
+                    res.redirect('/quizes');
+                },
+                function(err) {
+                    next(err);
+                }
+            );
         }
     }
 };
