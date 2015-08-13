@@ -1,3 +1,4 @@
+        
         <!-- Jumbotron -->
         <div class="jumbotron text-center">
             <h1>Añadir pregunta</h1>
@@ -5,18 +6,34 @@
         <!-- __form.ejs  -->
         <form class="form-horizontal" action="/quizes/create" method="POST">
             <!-- form content here -->
-            <div class="form-group">
+            <% 
+            var hasError = '';
+            if (errors && errors.pregunta) { 
+                hasError = ' has-error has-feedback';
+            } %>
+            <div class="form-group <%= hasError %>">
                 <!-- label and control -->
                 <label for="pregunta" class="control-label col-sm-3">Pregunta:</label>
                 <div class="col-sm-5">
-                    <input type="text" name="pregunta" id="pregunta" class="form-control" placeholder="<%= quiz.pregunta %>"/>
+                    <input type="text" name="pregunta" id="pregunta" class="form-control" value="<%= quiz.pregunta %>" placeholder="pregunta"/>
+                    <% if (errors && errors.pregunta) { %>
+                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <% } %>
                 </div>
             </div>
-            <div class="form-group">
+            <% 
+            var hasError = '';
+            if (errors && errors.respuesta) { 
+                hasError = ' has-error has-feedback';
+            } %>
+            <div class="form-group <%= hasError %>">
                 <!-- label and control -->
                 <label for="respuesta" class="control-label col-sm-3">Respuesta:</label>
                 <div class="col-sm-5">
-                    <input type="text" name="respuesta" id="respuesta" class="form-control" placeholder="<%= quiz.respuesta %>"/>
+                    <input type="text" name="respuesta" id="respuesta" class="form-control" value="<%= quiz.respuesta %>" placeholder="respuesta"/>
+                    <% if (errors && errors.respuesta) { %>
+                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <% } %>
                 </div>
             </div>
             <div class="form-group">

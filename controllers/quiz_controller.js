@@ -39,18 +39,35 @@ var models = require('../models/models.js');
         },
         new: function(req, res) {  // GET /quizes/new
             //var quiz = models.Quiz.build({pregunta: "Pregunta", respuesta: "Respuesta"});
-            var quiz = {pregunta: "Pregunta", respuesta: "Respuesta"};
-            res.render('quizes/new', {quiz: quiz});
+            var quiz = {pregunta: "", respuesta: ""};
+            res.render('quizes/new', {quiz: quiz, errors: {}});
         },
         create: function(req, res) {  // POST /quizes/create
-            // nuevo objeto no persistente asociado a la tabla Quiz
+            // version en forma´directa creacion objeto quiz
             var qz = {pregunta: req.body.pregunta, respuesta: req.body.respuesta};
             var quiz = models.Quiz.build(qz); 
 
+            // version MiriadaX no funciona en mi version de sequelize
             // inserta el objeto quiz, guarda en BBDD los campos pregunta y respuesta
-            quiz.save({ fields: ["pregunta","respuesta"]}).then( function(){
-                res.redirect('/quizes');
-            });
+            /*quiz.validate().then( function(err) {
+                if(err){
+                    res.render('quizes/new', {quiz: quiz, errors: err.errors});
+                } else {
+                    quiz.save({ fields: ["pregunta","respuesta"]}).then( function(){
+                        res.redirect('/quizes');
+                    });  
+                }
+            });*/
+
+            quiz.save({ fields: ["pregunta","respuesta"]}).then( 
+                function() {
+                    res.redirect('/quizes');
+                }, 
+                function(err) {
+                    console.log(Object.getOwnPropertyNames(err));
+                    res.render('quizes/new', {quiz: quiz, errors: err});
+                }
+            );
         }
     }
 };
