@@ -1,0 +1,44 @@
+        
+        <!-- Jumbotron -->
+        <div class="jumbotron text-center">
+            <h1>Editar pregunta</h1>
+        </div>
+        <!-- __form.ejs  -->
+        <form class="form-horizontal" action="/quizes/<%= quiz.id %>?_method=put" method="POST">
+            <!-- form content here -->
+            <% 
+            var hasError = '';
+            if (errors && errors.pregunta) { 
+                hasError = ' has-error has-feedback';
+            } %>
+            <div class="form-group <%= hasError %>">
+                <!-- label and control -->
+                <label for="pregunta" class="control-label col-sm-3">Pregunta:</label>
+                <div class="col-sm-5">
+                    <input type="text" name="pregunta" id="pregunta" class="form-control" value="<%= quiz.pregunta %>" placeholder="pregunta"/>
+                    <% if (errors && errors.pregunta) { %>
+                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <% } %>
+                </div>
+            </div>
+            <% 
+            var hasError = '';
+            if (errors && errors.respuesta) { 
+                hasError = ' has-error has-feedback';
+            } %>
+            <div class="form-group <%= hasError %>">
+                <!-- label and control -->
+                <label for="respuesta" class="control-label col-sm-3">Respuesta:</label>
+                <div class="col-sm-5">
+                    <input type="text" name="respuesta" id="respuesta" class="form-control" value="<%= quiz.respuesta %>" placeholder="respuesta"/>
+                    <% if (errors && errors.respuesta) { %>
+                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-5 col-sm-offset-3">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>

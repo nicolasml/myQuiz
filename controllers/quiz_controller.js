@@ -64,8 +64,33 @@ var models = require('../models/models.js');
                     res.redirect('/quizes');
                 }, 
                 function(err) {
-                    console.log(Object.getOwnPropertyNames(err));
-                    res.render('quizes/new', {quiz: quiz, errors: err});
+                    var errors = {};
+                    for (var i=0; i< err.errors.length; i++)
+                        errors[err.errors[i].path] = err.errors[i].message;   // Array a Object
+                    //console.log(Object.getOwnPropertyNames(err.errors));
+                    console.log(Object.getOwnPropertyNames(errors));
+                    res.render('quizes/new', {quiz: quiz, errors: errors});
+                }
+            );
+        },
+        edit: function(req, res) {  // GET /quizes/:id/edit, objeto quiz de la BBD cargado en autoload
+            var quiz = req.quiz;
+            res.render('quizes/edit', {quiz: quiz, errors: {}});
+        },
+        update: function(req, res) {  // PUT /quizes/:id
+            req.quiz.pregunta = req.body.pregunta;
+            req.quiz.respuesta = req.body.respuesta;
+
+            req.quiz.save({ fields: ["pregunta","respuesta"]}).then( 
+                function() {
+                    res.redirect('/quizes');
+                }, 
+                function(err) {
+                    var errors = {};
+                    for (var i=0; i< err.errors.length; i++)
+                        errors[err.errors[i].path] = err.errors[i].message;   // Array a Object
+                    console.log(Object.getOwnPropertyNames(errors));
+                    res.render('quizes/edit', {quiz: req.quiz, errors: errors});
                 }
             );
         }
