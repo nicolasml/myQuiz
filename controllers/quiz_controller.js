@@ -44,7 +44,7 @@ var models = require('../models/models.js');
         },
         create: function(req, res) {  // POST /quizes/create
             // version en forma´directa creacion objeto quiz
-            var qz = {pregunta: req.body.pregunta, respuesta: req.body.respuesta};
+            var qz = {pregunta: req.body.pregunta, respuesta: req.body.respuesta, tema: req.body.tema};
             var quiz = models.Quiz.build(qz); 
 
             // version MiriadaX no funciona en mi version de sequelize
@@ -59,7 +59,7 @@ var models = require('../models/models.js');
                 }
             });*/
 
-            quiz.save({ fields: ["pregunta","respuesta"]}).then( 
+            quiz.save({ fields: ["pregunta","respuesta","tema"]}).then( 
                 function() {
                     res.redirect('/quizes');
                 }, 
@@ -80,8 +80,9 @@ var models = require('../models/models.js');
         update: function(req, res) {  // PUT /quizes/:id
             req.quiz.pregunta = req.body.pregunta;
             req.quiz.respuesta = req.body.respuesta;
+            req.quiz.tema = req.body.tema;
 
-            req.quiz.save({ fields: ["pregunta","respuesta"]}).then( 
+            req.quiz.save({ fields: ["pregunta","respuesta","tema"]}).then( 
                 function() {
                     res.redirect('/quizes');
                 }, 

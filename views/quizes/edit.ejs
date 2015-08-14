@@ -37,8 +37,24 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="tematica" class="control-label col-sm-3">Temática:</label>
+                <div class="col-sm-5">
+                    <select name="tema" id="tematica" class="form-control">
+                      <option value="otro">Otro</option>
+                      <option value="humanidades">Humanidades</option>
+                      <option value="ocio">Ocio</option>
+                      <option value="ciencia">Ciencia</option>
+                      <option value="tecnologia">Tecnología</option>
+                    </select>
+                </div>
+            </div>
+            <script>
+                $("select").val('<%= quiz.tema %>');
+            </script>
+            <div class="form-group">
                 <div class="col-sm-5 col-sm-offset-3">
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
         </form>
+        

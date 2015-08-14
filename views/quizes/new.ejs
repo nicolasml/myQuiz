@@ -1,4 +1,4 @@
-        
+<!DOCTYPE html>        
         <!-- Jumbotron -->
         <div class="jumbotron text-center">
             <h1>Añadir pregunta</h1>
@@ -34,6 +34,18 @@
                     <% if (errors && errors.respuesta) { %>
                         <span class="glyphicon glyphicon-remove form-control-feedback"></span>
                     <% } %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tematica" class="control-label col-sm-3">Temática:</label>
+                <div class="col-sm-5">
+                    <select name="tema" id="tematica" class="form-control">
+                      <option value="otro" selected>Otro</option>
+                      <option value="humanidades">Humanidades</option>
+                      <option value="ocio">Ocio</option>
+                      <option value="ciencia">Ciencia</option>
+                      <option value="tecnologia">Tecnología</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
