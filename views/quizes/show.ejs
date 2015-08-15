@@ -1,3 +1,4 @@
+ <!DOCTYPE html>
         <!-- Jumbotron -->
         <div class="jumbotron text-center">
             <h1>Pregunta</h1>
@@ -16,3 +17,14 @@
                 </div>
             </div>
         </form>
+        <!-- Mostrar comentarios -->
+        <h2>Comentarios:</h2>
+        <% for (index in quiz.Comments) { %>
+            <div class="well well-sm"><%= quiz.Comments[index].texto %></div>
+        <% } %>
+        <!-- botón añadir comentario -->
+        <div style="padding-top: 2px;">
+            <a href="/quizes/<%= quiz.id %>/comments/new">
+                <button type="button" class="btn btn-primary">Nuevo comentario</button>
+            </a>
+        </div>

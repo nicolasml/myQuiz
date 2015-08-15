@@ -1,0 +1,29 @@
+<!DOCTYPE html>        
+        <!-- Jumbotron -->
+        <div class="jumbotron text-center">
+            <h1>Añadir comentario</h1>
+        </div>
+        <!-- __form.ejs  -->
+        <form class="form-horizontal" action="/quizes/<%= comment.QuizId %>/comments" method="POST">
+            <!-- form content here -->
+            <% 
+            var hasError = '';
+            if (errors && errors.texto) { 
+                hasError = ' has-error has-feedback';
+            } %>
+            <div class="form-group <%= hasError %>">
+                <!-- label and control -->
+                <label for="comentario" class="control-label col-sm-3">Comentario:</label>
+                <div class="col-sm-5">
+                    <input type="text" name="comentario" id="comentario" class="form-control" value="<%= comment.texto %>" placeholder="comentario"/>
+                    <% if (errors && errors.texto) { %>
+                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-5 col-sm-offset-3">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </form>

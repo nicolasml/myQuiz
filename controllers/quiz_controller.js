@@ -20,8 +20,11 @@ var models = require('../models/models.js');
         	}
         },
         load: function(req, res, next, quizId) {	// Autoload - factoriza el código si incluye ruta :quizId
-        	models.Quiz.find(req.params.quizId).then( function(quiz) {
-        		if (quiz){
+        	models.Quiz.find({ 
+                where : { id : quizId},
+                include: [{ model: models.Comment}]   // Añade propiedad quiz.Comments[]
+            }).then( function(quiz) {
+        		if (quiz) {
         			req.quiz = quiz;
         			next();
         		} else {

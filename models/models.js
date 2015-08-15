@@ -31,11 +31,19 @@ var sequelize = new Sequelize(DB_name, user, pwd,
 
 // importar definición de tabla Quiz segun quiz.js; se invoca desde models.js
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
+// importar definición tabla Comments y 
+var Comment = sequelize.import(path.join(__dirname,'comment'));
+
+//enlazar relacion 1:N entre Comment:Quiz
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment);
 
 // exportamos objeto Quiz (BBDD) para hacerlo disponible al resto de la aplicación
 exports.Quiz = Quiz;
+// exportamos objeto Comment (BBDD)
+exports.Comment = Comment;
 
-//
+// realiza conexión a BBDD
 sequelize.sync().then(function(){
 	Quiz.count().then(function(count){
 		if(count===0){
