@@ -8,6 +8,9 @@ var quizController = qC();
 var cC = require('../controllers/comment_controller');
 var commentController = cC(); 
 
+var sC = require('../controllers/session_controller');
+var sessionController = sC();
+
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz' });
@@ -16,7 +19,12 @@ router.get('/', function(req, res) {
 // Autoload de comandos con :quizId
 router.param('quizId', quizController.load);
 
-// Definición de rutas
+// Definición de rutas de session
+router.get('/login', sessionController.new);		// formulario login
+router.post('/login', sessionController.create);	// crear session
+router.get('/logout', sessionController.destroy);	// destruir session
+
+// Definición de rutas de /quizes
 router.get('/quizes', quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
