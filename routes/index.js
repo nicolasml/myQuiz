@@ -16,13 +16,13 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz' });
 });
 
-// Autoload de comandos con :quizId
-router.param('quizId', quizController.load);
+router.param('quizId', quizController.load);		// Autoload de url con :quizId
+router.param('commentId', commentController.load);	// Autoload :commentId
 
 // Definición de rutas de session
 router.get('/login', sessionController.new);		// formulario login
 router.post('/login', sessionController.create);	// crear session
-router.get('/logout', sessionController.destroy);	// destruir session
+router.get('/logout', sessionController.destroy);	// destruir session (deberia ser DELETE)
 
 // Definición de rutas de /quizes
 router.get('/quizes', quizController.index);
@@ -42,5 +42,7 @@ router.get('/author', function(req, res) {
 // Comments
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', 
+	sessionController.loginRequired, commentController.publish);	// deberia ser PUT
 
 module.exports = router;

@@ -19,9 +19,23 @@
         </form>
         <!-- Mostrar comentarios -->
         <h2>Comentarios:</h2>
-        <% for (index in quiz.Comments) { %>
-            <div class="well well-sm"><%= quiz.Comments[index].texto %></div>
-        <% } %>
+        <% for (index in quiz.Comments) { 
+            if( session.user || quiz.Comments[index].publicado) {
+        %>
+            <div class="well well-sm">
+                <%= quiz.Comments[index].texto %>
+                <% if( session.user && !quiz.Comments[index].publicado) { %>
+                <span class="pull-right">
+                    <a href="/quizes/<%= quiz.id %>/comments/<%= quiz.Comments[index].id %>/publish"><em>Publicar&nbsp;</em></a>
+                </span>
+                <% }  else if (session.user && quiz.Comments[index].publicado) { %>
+                <span class="pull-right">
+                    <a href="#"><span class="glyphicon glyphicon-ok"></span></a>
+                </span>
+                <% } %>
+            </div>         
+        <% } } %>
+        
         <!-- botón añadir comentario -->
         <div style="padding-top: 2px;">
             <a href="/quizes/<%= quiz.id %>/comments/new">
