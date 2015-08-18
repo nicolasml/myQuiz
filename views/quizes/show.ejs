@@ -1,22 +1,23 @@
  <!DOCTYPE html>
         <!-- Jumbotron -->
         <div class="jumbotron text-center">
-            <h1>Pregunta</h1>
+            <h1>Adivina</h1>
+            <br/>
+            <!-- form 1 -->
+            <form class="form-horizontal" action="/quizes/<%= quiz.id %>/answer" method="GET">
+                <!-- form content here -->
+                <div class="form-group">
+                    <!-- label and control -->
+                    <label for="respuesta" class="control-label col-sm-4"><%= quiz.pregunta %></label>
+                    <div class="col-sm-4">
+                        <input type="text" name="respuesta" id="respuesta" class="form-control" placeholder="Respuesta"/>
+                    </div>
+                    <div class="col-sm-4 text-left">
+                        <button type="submit" class="btn btn-success">Enviar</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <!-- form 1 -->
-        <form class="form-horizontal" action="/quizes/<%= quiz.id %>/answer" method="GET">
-            <!-- form content here -->
-            <div class="form-group">
-                <!-- label and control -->
-                <label for="respuesta" class="control-label col-sm-4"><%= quiz.pregunta %></label>
-                <div class="col-sm-4">
-                    <input type="text" name="respuesta" id="respuesta" class="form-control" placeholder="Respuesta"/>
-                </div>
-                <div class="col-sm-4">
-                    <button type="submit" class="btn btn-success">Enviar</button>
-                </div>
-            </div>
-        </form>
         <!-- Mostrar comentarios -->
         <h2>Comentarios:</h2>
         <% for (index in quiz.Comments) { 

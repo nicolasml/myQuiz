@@ -32,6 +32,37 @@ app.use(methodOverride('_method'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// MW auto-logout
+/* Si hay un método POST, PUT, DELETE, la transaccion se debe abortar */
+app.use(function(req, res, next){
+
+    if (req.session.user) { // si hay session
+        var now = (new Date()).getTime();
+        var diff = now - (req.session.backupTime || now);
+        if (!req.session.expired) req.session.expired = false;
+
+        if (diff > 120000) {                        // 2 minutos = 120000 milisegundos  
+            delete req.session.user;                // borra sesion anterior
+            delete req.session.backupTime;
+
+            req.session.expired = true;
+                    
+            if (req.method !== "GET"){               // Abortar
+                res.redirect("/");
+                return;
+            }
+        } else {
+            req.session.backupTime = now;
+        }
+        // Log times
+        //console.log("Transaction time: " + now);
+        //console.log("Diferencia: " + diff);   
+        //console.log("req.method: " + req.method); 
+    } 
+    
+    next();
+});
+
 // Helpers dinámicos
 app.use(function(req, res, next){
     // guardar path en session.redir para volver después de login

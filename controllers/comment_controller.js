@@ -35,8 +35,8 @@ var models = require('../models/models.js');
                     for (var i=0; i< err.errors.length; i++)
                         errors[err.errors[i].path] = err.errors[i].message;   // Array to Object
                     
-                    console.log(Object.getOwnPropertyNames(err));
-                    console.log(Object.getOwnPropertyNames(errors));
+                    //console.log(Object.getOwnPropertyNames(err));
+                    //console.log(Object.getOwnPropertyNames(errors));
 
                     res.render('comments/new.ejs', {comment: comment, errors: errors});
                 }

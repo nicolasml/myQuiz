@@ -70,6 +70,15 @@
             <!--/.container-fluid -->
         </nav>
 
+        <!-- alerts -->
+        <% if (session.expired) {%>
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>La sesión ha caducado.</strong> Para seguir editando haz login de nuevo
+        </div>
+        <% delete session.expired; %>
+        <% } %>
+
         <!-- site body -->
         <section>
             <%- body %>
